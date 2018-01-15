@@ -11,13 +11,20 @@ import random
 import requests
 import json
 from bs4 import BeautifulSoup
+from pyvirtualdisplay import Display
 from selenium import webdriver
+
+display = Display(visible=0, size=(1024, 768))
+display.start()
+print "start monitor"
+
 
 # base path for file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# for webdriver phantomjs-2.1.1-linux-x86_64 for cli
-driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'data/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'))
+# for webdriver chromedriver 2.35 linux64
+driver = webdriver.Chrome('/root/BitRocketBot/data/chromedriver')
+#driver = webdriver.Chrome()
 
 # Create Bot
 
@@ -98,6 +105,7 @@ if __name__ == "__main__":
 		Upbit("minutes", 1, "NEO", 2),
 		Upbit("minutes", 1, "ETC", 2),
 	]
+	print "Ready to start bot."
 	while 1:
 		upbit[int(random.random()*10%10)].parse()
 		time.sleep(random.random()*10%6)
