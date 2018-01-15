@@ -23,7 +23,12 @@ print "start monitor"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # for webdriver chromedriver 2.35 linux64
-driver = webdriver.Chrome('/root/BitRocketBot/data/chromedriver')
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--no-sandbox')
+driver = webdriver.Chrome(os.path.join(BASE_DIR, 'data/chromedriver'))
+#driver = webdriver.Chrome('/root/BitRocketBot/data/chromedriver')
+
 #driver = webdriver.Chrome()
 
 # Create Bot
