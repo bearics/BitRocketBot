@@ -11,11 +11,11 @@ import random
 import requests
 import json
 from bs4 import BeautifulSoup
-from pyvirtualdisplay import Display
+#from pyvirtualdisplay import Display
 from selenium import webdriver
 
-display = Display(visible=0, size=(1024, 768))
-display.start()
+#display = Display(visible=0, size=(1024, 768))
+#display.start()
 print "start monitor"
 
 
@@ -26,6 +26,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('no-sandbox')
 chrome_options.add_argument('headless')
+chrome_options.add_argument('window-size=800x600')
+chrome_options.add_argument('disable-gpu')
 driver = webdriver.Chrome(os.path.join(BASE_DIR, 'data/chromedriver'), chrome_options=chrome_options)
 #driver = webdriver.Chrome('/root/BitRocketBot/data/chromedriver')
 
@@ -86,9 +88,17 @@ class Upbit:
 		# save data in array and save in file
 		print self.coin + str(self.nowPrice / self.prevPrice)
 		if (self.nowPrice / self.prevPrice) > 1.007:
+			driver.get('https://upbit.com/exchange?code=CRIX.UPBIT.KRW-' + self.coin)
+			time.sleep(7)
+			driver.get_screenshot_as_file('tmp.png')
 			bot.sendMessage(chat_id='@BitRocketCH', text="%s가 현재 떡상 중입니다. %s >> %s"%(self.coin, self.prevPrice, self.nowPrice))
+			bot.sendPhoto(chat_id='@BitRocketCH', photo=open('tmp.png', 'r'))
 		elif (self.nowPrice / self.prevPrice) < 0.993:
+			driver.get('https://upbit.com/exchange?code=CRIX.UPBIT.KRW-' + self.coin)	
+			time.sleep(7)
+			driver.get_screenshot_as_file('tmp.png')
 			bot.sendMessage(chat_id='@BitRocketCH', text="%s가 현재 떡락 중입니다. %s >> %s"%(self.coin, self.prevPrice, self.nowPrice))
+			bot.sendPhoto(chat_id='@BitRocketCH', photo=open('tmp.png', 'r'))
 
 		return
 
