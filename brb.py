@@ -46,7 +46,8 @@ class Upbit:
 		self.inter = inter
 		self.coin = coin
 		self.count = count
-		self.url = "https://crix-api.upbit.com/v1/crix/candles/{term}/{inter}?code=CRIX.UPBIT.KRW-{coin}&count={count}".format( term = self.term, inter = self.inter, coin = self.coin, count = self.count)
+		self.url = "https://crix-api.upbit.com/v1/crix/candles/{term}/{inter}?code=CRIX.UPBIT.KRW-{coin}&count={count}".format(
+			term = self.term, inter = self.inter, coin = self.coin, count = self.count)
 		print self.url
 		return
 
@@ -91,13 +92,15 @@ class Upbit:
 			driver.get('https://upbit.com/exchange?code=CRIX.UPBIT.KRW-' + self.coin)
 			time.sleep(7)
 			driver.get_screenshot_as_file('tmp.png')
-			bot.sendMessage(chat_id='@BitRocketCH', text="%s가 현재 떡상 중입니다. %s >> %s"%(self.coin, self.prevPrice, self.nowPrice))
+			bot.sendMessage(chat_id='@BitRocketCH', text="%s가 현재 떡상 중입니다. %s >> %s" \
+				%(self.coin, self.prevPrice, self.nowPrice))
 			bot.sendPhoto(chat_id='@BitRocketCH', photo=open('tmp.png', 'r'))
 		elif (self.nowPrice / self.prevPrice) < 0.993:
 			driver.get('https://upbit.com/exchange?code=CRIX.UPBIT.KRW-' + self.coin)	
 			time.sleep(7)
 			driver.get_screenshot_as_file('tmp.png')
-			bot.sendMessage(chat_id='@BitRocketCH', text="%s가 현재 떡락 중입니다. %s >> %s"%(self.coin, self.prevPrice, self.nowPrice))
+			bot.sendMessage(chat_id='@BitRocketCH', text="%s가 현재 떡락 중입니다. %s >> %s" \
+				%(self.coin, self.prevPrice, self.nowPrice))
 			bot.sendPhoto(chat_id='@BitRocketCH', photo=open('tmp.png', 'r'))
 
 		return
