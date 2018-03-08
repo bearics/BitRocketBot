@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('no-sandbox')
 chrome_options.add_argument('headless')
-chrome_options.add_argument('window-size=800x600')
+chrome_options.add_argument('window-size=1920x1080')
 chrome_options.add_argument('disable-gpu')
 driver = webdriver.Chrome(os.path.join(BASE_DIR, 'data/chromedriver'), chrome_options=chrome_options)
 #driver = webdriver.Chrome('/root/BitRocketBot/data/chromedriver')
@@ -88,14 +88,14 @@ class Upbit:
 
 		# save data in array and save in file
 		print self.coin + str(self.nowPrice / self.prevPrice)
-		if (self.nowPrice / self.prevPrice) > 1.007:
+		if (self.nowPrice / self.prevPrice) > 1.00007:
 			driver.get('https://upbit.com/exchange?code=CRIX.UPBIT.KRW-' + self.coin)
 			time.sleep(7)
 			driver.get_screenshot_as_file('tmp.png')
 			bot.sendMessage(chat_id='@BitRocketCH', text="%s가 현재 떡상 중입니다. %s >> %s" \
 				%(self.coin, self.prevPrice, self.nowPrice))
 			bot.sendPhoto(chat_id='@BitRocketCH', photo=open('tmp.png', 'r'))
-		elif (self.nowPrice / self.prevPrice) < 0.993:
+		elif (self.nowPrice / self.prevPrice) < 0.99993:
 			driver.get('https://upbit.com/exchange?code=CRIX.UPBIT.KRW-' + self.coin)	
 			time.sleep(7)
 			driver.get_screenshot_as_file('tmp.png')
